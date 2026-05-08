@@ -1,5 +1,9 @@
 # 项目上下文
 
+### 项目概述
+
+毛泽东著作诗词录 - 收录毛泽东同志各历史时期的言论、文章、诗词，按八个历史阶段详尽呈现伟人思想轨迹与文学成就。
+
 ### 版本技术栈
 
 - **Framework**: Next.js 16 (App Router)
@@ -7,27 +11,61 @@
 - **Language**: TypeScript 5
 - **UI 组件**: shadcn/ui (基于 Radix UI)
 - **Styling**: Tailwind CSS 4
+- **配色**: 中国红/金为主色调，暖色系
 
 ## 目录结构
 
 ```
-├── public/                 # 静态资源
-├── scripts/                # 构建与启动脚本
-│   ├── build.sh            # 构建脚本
-│   ├── dev.sh              # 开发环境启动脚本
-│   ├── prepare.sh          # 预处理脚本
-│   └── start.sh            # 生产环境启动脚本
+├── public/
+│   └── hero-bg.jpeg           # 首页 Hero 背景图（水墨山水风格）
+├── scripts/                    # 构建与启动脚本
 ├── src/
-│   ├── app/                # 页面路由与布局
-│   ├── components/ui/      # Shadcn UI 组件库
-│   ├── hooks/              # 自定义 Hooks
-│   ├── lib/                # 工具库
-│   │   └── utils.ts        # 通用工具函数 (cn)
-│   └── server.ts           # 自定义服务端入口
-├── next.config.ts          # Next.js 配置
-├── package.json            # 项目依赖管理
-└── tsconfig.json           # TypeScript 配置
+│   ├── app/
+│   │   ├── layout.tsx          # 根布局（中文 lang、自定义 metadata）
+│   │   ├── page.tsx            # 首页（Hero、时期列表、经典诗词、语录）
+│   │   ├── globals.css         # 全局样式（自定义红金配色、诗词排版、动画）
+│   │   └── period/
+│   │       └── [id]/
+│   │           ├── page.tsx    # 阶段详情页（概述、诗词、文章、语录、上下时期导航）
+│   │           └── poem/
+│   │               └── [poemId]/
+│   │                   └── page.tsx  # 诗词详情页（原文、创作背景、上下首导航）
+│   ├── components/ui/          # Shadcn UI 组件库
+│   ├── hooks/
+│   ├── lib/
+│   │   ├── utils.ts            # 通用工具函数 (cn)
+│   │   └── data.ts             # 核心数据层（8个历史时期、诗词、文章、语录、查询函数）
+│   └── server.ts
+├── next.config.ts
+├── package.json
+└── tsconfig.json
 ```
+
+## 数据结构
+
+核心数据定义在 `src/lib/data.ts`，包含：
+
+- **Period**: 历史时期（id, name, years, description, poems, articles, quotes, color）
+- **Poem**: 诗词（id, title, year, content, background）
+- **Article**: 文章/讲话（id, title, year, summary, type: article/speech/letter/directive）
+- **Quote**: 语录（id, content, source, year）
+
+### 八个历史时期
+
+1. 少年求学时期 (1893-1918)
+2. 五四运动与大革命时期 (1919-1927)
+3. 土地革命时期 (1927-1937)
+4. 抗日战争时期 (1937-1945)
+5. 解放战争时期 (1945-1949)
+6. 新中国建设时期 (1949-1957)
+7. 社会主义探索时期 (1957-1966)
+8. 晚年时期 (1966-1976)
+
+### 查询函数
+
+- `getPeriodById(id)` - 按 ID 获取时期
+- `getPoemById(periodId, poemId)` - 获取具体诗词
+- `getAllPoems()` / `getAllQuotes()` / `getAllArticles()` - 全局查询
 
 - 项目文件（如 app 目录、pages 目录、components 等）默认初始化到 `src/` 目录下。
 
