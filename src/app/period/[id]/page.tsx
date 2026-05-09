@@ -134,36 +134,42 @@ export default async function PeriodPage({ params }: PageProps) {
           </h2>
           <div className="space-y-3">
             {period.articles.map((article) => (
-              <div
+              <Link
                 key={article.id}
-                className="rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:shadow-md hover:border-primary/20"
+                href={`/period/${period.id}/article/${article.id}`}
+                className="group block"
               >
-                <div className="flex items-start gap-3">
-                  <span
-                    className="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-medium text-white shrink-0"
-                    style={{ backgroundColor: period.color }}
-                  >
-                    {article.type === 'speech'
-                      ? '讲话'
-                      : article.type === 'letter'
-                        ? '书信'
-                        : article.type === 'directive'
-                          ? '指示'
-                          : '文章'}
-                  </span>
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between">
-                      <h3 className="text-base font-bold">{article.title}</h3>
-                      <span className="text-xs text-muted-foreground ml-2 shrink-0">
-                        {article.year}
-                      </span>
+                <div className="rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:shadow-md hover:border-primary/30 hover:-translate-y-0.5">
+                  <div className="flex items-start gap-3">
+                    <span
+                      className="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-medium text-white shrink-0"
+                      style={{ backgroundColor: period.color }}
+                    >
+                      {article.type === 'speech'
+                        ? '讲话'
+                        : article.type === 'letter'
+                          ? '书信'
+                          : article.type === 'directive'
+                            ? '指示'
+                            : '文章'}
+                    </span>
+                    <div className="flex-1">
+                      <div className="flex items-start justify-between">
+                        <h3 className="text-base font-bold group-hover:text-primary transition-colors">{article.title}</h3>
+                        <span className="text-xs text-muted-foreground ml-2 shrink-0">
+                          {article.year}
+                        </span>
+                      </div>
+                      <p className="text-muted-foreground text-sm mt-2 leading-relaxed">
+                        {article.summary}
+                      </p>
+                      <div className="mt-3 text-primary text-sm font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        阅读全文 <ChevronRight className="w-3 h-3" />
+                      </div>
                     </div>
-                    <p className="text-muted-foreground text-sm mt-2 leading-relaxed">
-                      {article.summary}
-                    </p>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
