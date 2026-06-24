@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { periods, getPeriodById } from '@/lib/data';
+import { assetUrl } from '@/lib/utils';
 import { ArrowLeft, BookOpen, Feather, Quote, ChevronRight } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -40,7 +41,7 @@ export default async function PeriodPage({ params }: PageProps) {
       >
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: 'url(/hero-bg.jpeg)' }}
+          style={{ backgroundImage: `url(${assetUrl('/hero-bg.jpeg')})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
         <div className="relative z-10 max-w-5xl mx-auto px-4 text-white">

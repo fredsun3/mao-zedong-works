@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { periods, getPeriodById, getPoemById } from '@/lib/data';
+import { assetUrl } from '@/lib/utils';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -50,7 +51,7 @@ export default async function PoemPage({ params }: PageProps) {
       >
         <div
           className="absolute inset-0 bg-cover bg-center opacity-15"
-          style={{ backgroundImage: 'url(/hero-bg.jpeg)' }}
+          style={{ backgroundImage: `url(${assetUrl('/hero-bg.jpeg')})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-white">

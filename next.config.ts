@@ -1,10 +1,14 @@
 import type { NextConfig } from 'next';
+import path from 'path';
+
+const isGitHubPages = process.env.GITHUB_PAGES === 'true';
 
 const nextConfig: NextConfig = {
-  // outputFileTracingRoot: path.resolve(__dirname, '../../'),  // Uncomment and add 'import path from "path"' if needed
-  /* config options here */
-  allowedDevOrigins: ['*.dev.coze.site'],
+  outputFileTracingRoot: path.resolve(__dirname),
+  output: isGitHubPages ? 'export' : undefined,
+  basePath: isGitHubPages ? '/mao-zedong-works' : undefined,
   images: {
+    unoptimized: isGitHubPages ? true : undefined,
     remotePatterns: [
       {
         protocol: 'https',
@@ -13,6 +17,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  allowedDevOrigins: ['*.dev.coze.site'],
 };
 
 export default nextConfig;

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { periods } from '@/lib/data';
+import { assetUrl } from '@/lib/utils';
 import { BookOpen, Feather, Quote, ChevronRight } from 'lucide-react';
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
       <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(/hero-bg.jpeg)' }}
+          style={{ backgroundImage: `url(${assetUrl('/hero-bg.jpeg')})` }}
         />
         <div className="hero-overlay absolute inset-0" />
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
